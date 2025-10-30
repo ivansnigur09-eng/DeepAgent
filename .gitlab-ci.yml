@@ -1,0 +1,70 @@
+image: openjdk:17-jdk
+
+variables:
+  ANDROID_COMPILE_SDK: "34"
+  ANDROID_BUILD_TOOLS: "34.0.0"
+  ANDROID_SDK_TOOLS: "9477386"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - apt-get --quiet update --yes
+  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+  
+  # Setup Android SDK
+  - export ANDROID_HOME="${PWD}/android-sdk-linux"
+  - export PATH="${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools"
+  
+  # Download Android SDK
+  - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip
+  - unzip -q android-sdk.zip -d $ANDROID_HOME/cmdline-tools
+  - mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+  
+  # Accept licenses
+  - mkdir -p ~/.android
+  - touch ~/.android/repositories.cfg
+  - yes | sdkmanager --licenses || true
+  - sdkmanager "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}"
+  
+  # Make gradlew executable
+  - chmod +x ./gradlew
+
+stages:
+  - build
+  - deploy
+
+build_debug:
+  stage: build
+  script:
+    - ./gradlew assembleDebug
+  artifacts:
+    paths:
+      - app/build/outputs/apk/debug/app-debug.apk
+    expire_in: 1 week
+  only:
+    - bootstrap
+    - main
+
+build_release:
+  stage: build
+  script:
+    - ./gradlew assembleRelease
+  artifacts:
+    paths:
+      - app/build/outputs/apk/release/app-release-unsigned.apk
+    expire_in: 1 week
+  only:
+    - bootstrap
+    - main
+
+deploy_artifacts:
+  stage: deploy
+  script:
+    - echo "APK files built successfully!"
+    - ls -lh app/build/outputs/apk/debug/
+    - ls -lh app/build/outputs/apk/release/
+  dependencies:
+    - build_debug
+    - build_release
+  only:
+    - bootstrap
+    - main
