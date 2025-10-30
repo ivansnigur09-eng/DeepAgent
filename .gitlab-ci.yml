@@ -9,28 +9,19 @@ variables:
 before_script:
   - apt-get --quiet update --yes
   - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
-  
-  # Setup Android SDK
   - export ANDROID_HOME="${PWD}/android-sdk-linux"
   - export PATH="${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools"
-  
-  # Download Android SDK
   - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip
   - unzip -q android-sdk.zip -d $ANDROID_HOME/cmdline-tools
   - mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
-  
-  # Accept licenses
   - mkdir -p ~/.android
   - touch ~/.android/repositories.cfg
   - yes | sdkmanager --licenses || true
   - sdkmanager "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}" "build-tools;${ANDROID_BUILD_TOOLS}"
-  
-  # Make gradlew executable
   - chmod +x ./gradlew
 
 stages:
   - build
-  - deploy
 
 build_debug:
   stage: build
@@ -40,9 +31,6 @@ build_debug:
     paths:
       - app/build/outputs/apk/debug/app-debug.apk
     expire_in: 1 week
-  rules:
-    - if: $CI_COMMIT_BRANCH == "bootstrap"
-    - if: $CI_COMMIT_BRANCH == "main"
 
 build_release:
   stage: build
@@ -52,19 +40,3 @@ build_release:
     paths:
       - app/build/outputs/apk/release/app-release-unsigned.apk
     expire_in: 1 week
-  rules:
-    - if: $CI_COMMIT_BRANCH == "bootstrap"
-    - if: $CI_COMMIT_BRANCH == "main"
-
-deploy_artifacts:
-  stage: deploy
-  script:
-    - echo "APK files built successfully!"
-    - ls -lh app/build/outputs/apk/debug/ || true
-    - ls -lh app/build/outputs/apk/release/ || true
-  dependencies:
-    - build_debug
-    - build_release
-  rules:
-    - if: $CI_COMMIT_BRANCH == "bootstrap"
-    - if: $CI_COMMIT_BRANCH == "main"
