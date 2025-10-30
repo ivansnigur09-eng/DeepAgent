@@ -21,4 +21,16 @@
     <string name="enable_biometric">Увімкнути біометричний замок</string>
     <string name="about">Про додаток</string>
     <string name="version">Версія</string>
+    <string name="ai_features">AI Функції</string>
+    <string name="screen_analysis">Аналіз Екрану</string>
+    <string name="voice_control">Голосове Керування</string>
+    <string name="enable_screen_monitoring">Увімкнути моніторинг екрану</string>
+    <string name="enable_voice_commands">Увімкнути голосові команди</string>
+    <string name="ai_insights">AI Інсайти</string>
+    <string name="trading_bot">Торговий Бот</string>
+    <string name="upwork_automation">Автоматизація Upwork</string>
+    <string name="revenue_dashboard">Панель Доходів</string>
+    <string name="start_monitoring">Почати моніторинг</string>
+    <string name="stop_monitoring">Зупинити моніторинг</string>
+    <string name="analyzing">Аналізую...</string>
 </resources>

@@ -32,4 +32,16 @@
     <string name="enable_biometric">Enable Biometric Lock</string>
     <string name="about">About</string>
     <string name="version">Version</string>
+    <string name="ai_features">AI Features</string>
+    <string name="screen_analysis">Screen Analysis</string>
+    <string name="voice_control">Voice Control</string>
+    <string name="enable_screen_monitoring">Enable Screen Monitoring</string>
+    <string name="enable_voice_commands">Enable Voice Commands</string>
+    <string name="ai_insights">AI Insights</string>
+    <string name="trading_bot">Trading Bot</string>
+    <string name="upwork_automation">Upwork Automation</string>
+    <string name="revenue_dashboard">Revenue Dashboard</string>
+    <string name="start_monitoring">Start Monitoring</string>
+    <string name="stop_monitoring">Stop Monitoring</string>
+    <string name="analyzing">Analyzing...</string>
 </resources>
