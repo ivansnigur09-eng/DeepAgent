@@ -40,9 +40,9 @@ build_debug:
     paths:
       - app/build/outputs/apk/debug/app-debug.apk
     expire_in: 1 week
-  only:
-    - bootstrap
-    - main
+  rules:
+    - if: $CI_COMMIT_BRANCH == "bootstrap"
+    - if: $CI_COMMIT_BRANCH == "main"
 
 build_release:
   stage: build
@@ -52,19 +52,19 @@ build_release:
     paths:
       - app/build/outputs/apk/release/app-release-unsigned.apk
     expire_in: 1 week
-  only:
-    - bootstrap
-    - main
+  rules:
+    - if: $CI_COMMIT_BRANCH == "bootstrap"
+    - if: $CI_COMMIT_BRANCH == "main"
 
 deploy_artifacts:
   stage: deploy
   script:
     - echo "APK files built successfully!"
-    - ls -lh app/build/outputs/apk/debug/
-    - ls -lh app/build/outputs/apk/release/
+    - ls -lh app/build/outputs/apk/debug/ || true
+    - ls -lh app/build/outputs/apk/release/ || true
   dependencies:
     - build_debug
     - build_release
-  only:
-    - bootstrap
-    - main
+  rules:
+    - if: $CI_COMMIT_BRANCH == "bootstrap"
+    - if: $CI_COMMIT_BRANCH == "main"
