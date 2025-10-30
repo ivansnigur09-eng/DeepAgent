@@ -44,6 +44,11 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
     
+    private fun setupRevenueDashboard() {
+        // Add button in layout if needed
+        // For now, accessible from main screen
+    }
+    
     private fun setupVersion() {
         binding.versionText.text = "${getString(R.string.version)}: ${BuildConfig.VERSION_NAME}"
     }

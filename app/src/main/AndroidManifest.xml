@@ -59,12 +59,26 @@
             android:label="@string/api_keys"
             android:theme="@style/Theme.DeepAgent" />
 
+        <!-- Revenue Dashboard Activity -->
+        <activity
+            android:name=".ui.RevenueDashboardActivity"
+            android:exported="false"
+            android:label="@string/revenue_dashboard"
+            android:theme="@style/Theme.DeepAgent" />
+
         <!-- Screen Capture Service -->
         <service
             android:name=".services.ScreenCaptureService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="mediaProjection" />
+
+        <!-- Trading Bot Service -->
+        <service
+            android:name=".services.TradingBotService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
 
     </application>
 

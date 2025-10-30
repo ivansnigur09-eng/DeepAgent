@@ -37,6 +37,11 @@ class MainActivity : AppCompatActivity() {
         binding.settingsButton.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
+        
+        binding.settingsButton.setOnLongClickListener {
+            startActivity(Intent(this, RevenueDashboardActivity::class.java))
+            true
+        }
     }
     
     private fun setupRecyclerView() {
