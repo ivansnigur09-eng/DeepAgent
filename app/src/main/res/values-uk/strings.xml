@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DeepAgent</string>
+    <string name="settings">Налаштування</string>
+    <string name="api_keys">API Ключі</string>
+    <string name="invite_code">Код запрошення</string>
+    <string name="activate">Активувати</string>
+    <string name="enter_invite_code">Введіть код запрошення</string>
+    <string name="invalid_invite_code">Недійсний або прострочений код</string>
+    <string name="activation_successful">Активація успішна!</string>
+    <string name="search_apps">Пошук додатків...</string>
+    <string name="no_apps_found">Додатки не знайдено</string>
+    <string name="add_api_key">Додати API ключ</string>
+    <string name="api_key_name">Назва API ключа</string>
+    <string name="api_key_value">Значення API ключа</string>
+    <string name="save">Зберегти</string>
+    <string name="cancel">Скасувати</string>
+    <string name="delete">Видалити</string>
+    <string name="language">Мова</string>
+    <string name="security">Безпека</string>
+    <string name="enable_biometric">Увімкнути біометричний замок</string>
+    <string name="about">Про додаток</string>
+    <string name="version">Версія</string>
+</resources>
